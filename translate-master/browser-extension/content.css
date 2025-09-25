@@ -1,0 +1,31 @@
+/* Content CSS for Manos Browser Extension */
+
+/* Ensure our widget doesn't interfere with page styles */
+#manos-translate-widget * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Additional widget styles that might be needed */
+#manos-translate-widget {
+  all: initial;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Prevent conflicts with page styles */
+#manos-translate-widget button {
+  all: unset;
+}
+
+#manos-translate-widget div {
+  all: unset;
+}
+
+/* Reset any potential conflicts */
+#manos-translate-widget .manos-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+}

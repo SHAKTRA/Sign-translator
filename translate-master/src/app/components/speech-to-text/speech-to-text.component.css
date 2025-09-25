@@ -1,0 +1,61 @@
+.circle-icon {
+  --border-radius: 50%;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  width: 60px;
+  height: 60px;
+  margin: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.circle-icon:not([color="medium"]) {
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --color: white;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.circle-icon:not([color="medium"]):hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+}
+
+.circle-icon ion-icon {
+  font-size: 28px;
+  color: white !important;
+}
+
+.circle-icon[color="medium"] ion-icon {
+  font-size: 28px;
+  color: var(--ion-color-medium) !important;
+}
+
+/* Recording state - red pulsing effect */
+.circle-icon:has(ion-icon[name="stop-circle-outline"]) {
+  --background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  animation: recording-pulse 1s ease-in-out infinite;
+  box-shadow: 0 4px 20px rgba(255, 107, 107, 0.6);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  }
+  50% {
+    box-shadow: 0 6px 30px rgba(102, 126, 234, 0.7);
+  }
+}
+
+@keyframes recording-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.6);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 6px 35px rgba(255, 107, 107, 0.9);
+    transform: scale(1.05);
+  }
+}

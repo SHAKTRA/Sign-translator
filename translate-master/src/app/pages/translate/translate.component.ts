@@ -8,8 +8,10 @@ import {TranslocoService} from '@jsverse/transloco';
 import {TranslationService} from '../../modules/translate/translate.service';
 import {Meta, Title} from '@angular/platform-browser';
 import {MediaMatcher} from '@angular/cdk/layout';
+import {ActivatedRoute} from '@angular/router';
 import {TranslateMobileComponent} from './translate-mobile/translate-mobile.component';
 import {TranslateDesktopComponent} from './translate-desktop/translate-desktop.component';
+import {SetText} from '../../modules/translate/translate.actions';
 
 @Component({
   selector: 'app-translate',
@@ -24,6 +26,7 @@ export class TranslateComponent extends BaseComponent implements OnInit {
   private mediaMatcher = inject(MediaMatcher);
   private meta = inject(Meta);
   private title = inject(Title);
+  private route = inject(ActivatedRoute);
 
   spokenToSigned$: Observable<boolean>;
 
@@ -46,6 +49,26 @@ export class TranslateComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Handle URL parameters for text from browser extension
+    this.route.queryParams.pipe(
+      tap(params => {
+        if (params['text']) {
+          // Set the text in the store for the input component to use
+          this.store.dispatch(new SetText(decodeURIComponent(params['text'])));
+          
+          // If autoTranslate is true, trigger translation
+          if (params['autoTranslate'] === 'true') {
+            // Small delay to ensure the text is set before translation
+            setTimeout(() => {
+              // Dispatch translation action or trigger translation
+              // This will depend on your translation flow
+            }, 100);
+          }
+        }
+      }),
+      takeUntil(this.ngUnsubscribe)
+    ).subscribe();
+
     this.transloco.events$
       .pipe(
         tap(() => {

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 300px;
+      padding: 0;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #00ff88, #0088ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+      margin-bottom: 5px;
+    }
+    
+    .subtitle {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    .content {
+      padding: 20px;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+    }
+    
+    .feature-icon {
+      font-size: 20px;
+      margin-right: 12px;
+    }
+    
+    .feature-text {
+      font-size: 14px;
+      line-height: 1.3;
+    }
+    
+    .actions {
+      margin-top: 20px;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(45deg, #00ff88, #0088ff);
+      color: white;
+      box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .instructions {
+      font-size: 12px;
+      opacity: 0.8;
+      text-align: center;
+      margin-top: 15px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Manos</div>
+    <div class="subtitle">Sign Language Translator</div>
+  </div>
+  
+  <div class="content">
+    <div class="feature">
+      <span class="feature-icon">🤟</span>
+      <div class="feature-text">
+        <strong>Right-click any text</strong><br>
+        Select "Translate with Manos"
+      </div>
+    </div>
+    
+    <div class="feature">
+      <span class="feature-icon">⚡</span>
+      <div class="feature-text">
+        <strong>Instant Translation</strong><br>
+        Real-time sign language conversion
+      </div>
+    </div>
+    
+    <div class="feature">
+      <span class="feature-icon">🌐</span>
+      <div class="feature-text">
+        <strong>Works Everywhere</strong><br>
+        Any website, any text selection
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button class="btn btn-primary" id="openApp">
+        🚀 Open Manos App
+      </button>
+      <button class="btn btn-secondary" id="translateSelected">
+        🤟 Translate Selected Text
+      </button>
+    </div>
+    
+    <div class="instructions">
+      💡 <strong>How to use:</strong><br>
+      1. Select any text on a webpage<br>
+      2. Right-click and choose "Translate with Manos"<br>
+      3. Get instant sign language translation!
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

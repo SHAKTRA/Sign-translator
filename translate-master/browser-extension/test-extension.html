@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Manos Extension</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .highlight {
+            background: yellow;
+            padding: 2px 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🤟 Test Page for Manos Extension</h1>
+    
+    <div class="test-section">
+        <h2>Instructions:</h2>
+        <ol>
+            <li>Select any text below by highlighting it</li>
+            <li>Right-click on the selected text</li>
+            <li>Look for "Translate with Manos 🤟" in the context menu</li>
+            <li>Click it to see the translation widget!</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>Sample Text to Select:</h2>
+        <p>
+            <span class="highlight">Hello, welcome to Manos!</span> This is a revolutionary sign language translation app 
+            that helps bridge communication gaps between hearing and deaf communities.
+        </p>
+        
+        <p>
+            Sign language is a complete, natural language that has the same linguistic properties as spoken languages, 
+            with grammar that differs from that of spoken languages. Sign languages are expressed through manual 
+            articulations in combination with non-manual elements.
+        </p>
+        
+        <p>
+            <strong>Try selecting this sentence:</strong> Manos provides real-time translation between 40+ signed 
+            and spoken languages, making communication accessible to everyone.
+        </p>
+    </div>
+
+    <div class="test-section">
+        <h2>More Test Content:</h2>
+        <ul>
+            <li>Select this list item to test the extension</li>
+            <li>Try selecting multiple words across different elements</li>
+            <li>Test with longer paragraphs and shorter phrases</li>
+            <li>The extension should work with any text selection</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>Expected Behavior:</h2>
+        <p>
+            When you right-click on selected text, you should see a context menu option called 
+            <strong>"Translate with Manos 🤟"</strong>. Clicking this will show a beautiful 
+            gradient widget with options to translate the text or open the Manos app.
+        </p>
+    </div>
+
+    <script>
+        // Add some interactivity for testing
+        document.addEventListener('selectionchange', function() {
+            const selection = window.getSelection().toString();
+            if (selection.length > 0) {
+                console.log('Text selected:', selection);
+            }
+        });
+    </script>
+</body>
+</html>
