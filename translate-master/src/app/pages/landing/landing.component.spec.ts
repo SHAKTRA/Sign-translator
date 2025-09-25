@@ -3,7 +3,7 @@ import {axe, toHaveNoViolations} from 'jasmine-axe';
 
 import {LandingComponent} from './landing.component';
 import {provideRouter} from '@angular/router';
-import {AboutComponent} from './about/about.component';
+import {ContributeComponent} from './contribute/contribute.component';
 import {AppTranslocoTestingModule} from '../../core/modules/transloco/transloco-testing.module';
 import {provideIonicAngular} from '@ionic/angular/standalone';
 
@@ -14,7 +14,7 @@ describe('LandingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppTranslocoTestingModule, LandingComponent],
-      providers: [provideRouter([{path: '', component: AboutComponent}]), provideIonicAngular()],
+      providers: [provideRouter([{path: '', component: ContributeComponent}]), provideIonicAngular()],
     }).compileComponents();
   });
 

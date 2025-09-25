@@ -12,7 +12,7 @@
         </ion-list-header>
         <ion-menu-toggle>
           @for (page of pages; track page) {
-            <ion-item [routerLink]="['/about', page]" queryParamsHandling="preserve">
+            <ion-item [routerLink]="['/legal', page]" queryParamsHandling="preserve">
               <ion-label>{{ 'landing.' + page + '.title' | transloco }}</ion-label>
             </ion-item>
           }
@@ -47,7 +47,7 @@
       <ion-buttons slot="secondary">
         @for (page of pages; track page) {
           <ion-button
-            [routerLink]="['/about', page]"
+            [routerLink]="['/legal', page]"
             queryParamsHandling="preserve"
             fill="solid"
             color="light"

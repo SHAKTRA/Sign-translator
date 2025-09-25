@@ -55,7 +55,7 @@ export class LandingComponent {
   private mediaMatcher = inject(MediaMatcher);
   isMobile = this.mediaMatcher.matchMedia('(max-width: 768px)');
 
-  pages: string[] = ['about', 'contribute'];
+  pages: string[] = ['contribute'];
 
   constructor() {
     addIcons({arrowForward});
