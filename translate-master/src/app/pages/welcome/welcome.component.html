@@ -1,0 +1,124 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <app-logo [text]="'translate.logo' | transloco" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="welcome-content">
+  <div class="welcome-container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <h1 class="hero-title">
+        Breaking Communication Barriers with 
+        <span class="highlight">Manos</span>
+      </h1>
+      <p class="hero-subtitle">
+        Bridging the gap between hearing and deaf communities through real-time sign language translation
+      </p>
+    </div>
+
+    <!-- Problem Statement -->
+    <ion-card class="problem-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="people" color="danger"></ion-icon>
+          The Problem
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          Over <strong>466 million people worldwide</strong> have disabling hearing loss, yet communication barriers 
+          persist between deaf and hearing communities. Traditional sign language interpretation is often:
+        </p>
+        <ul>
+          <li>Expensive and not always available</li>
+          <li>Limited to specific locations and times</li>
+          <li>Creates dependency on third-party interpreters</li>
+          <li>Reduces spontaneous communication opportunities</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Solution -->
+    <ion-card class="solution-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+          Our Solution
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          <strong>Manos</strong> provides real-time, AI-powered sign language translation that:
+        </p>
+        <ul>
+          <li><ion-icon name="accessibility" color="primary"></ion-icon> Translates between 40+ signed and spoken languages instantly</li>
+          <li><ion-icon name="globe" color="primary"></ion-icon> Works offline - no internet required</li>
+          <li><ion-icon name="checkmark-circle" color="success"></ion-icon> Free and accessible to everyone</li>
+          <li><ion-icon name="people" color="primary"></ion-icon> Empowers direct communication without intermediaries</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Features -->
+    <div class="features-grid">
+      <div class="feature-item">
+        <ion-icon name="accessibility" color="primary"></ion-icon>
+        <h3>Real-Time Translation</h3>
+        <p>Instant translation between sign and spoken languages</p>
+      </div>
+      <div class="feature-item">
+        <ion-icon name="globe" color="primary"></ion-icon>
+        <h3>Multilingual Support</h3>
+        <p>Support for 40+ sign languages worldwide</p>
+      </div>
+      <div class="feature-item">
+        <ion-icon name="checkmark-circle" color="success"></ion-icon>
+        <h3>Open Source</h3>
+        <p>Community-driven development for transparency</p>
+      </div>
+    </div>
+
+    <!-- Credits -->
+    <ion-card class="credits-card">
+      <ion-card-header>
+        <ion-card-title>Credits & Acknowledgments</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          This application is built upon the amazing work of the 
+          <a href="https://github.com/sign/translate" target="_blank" rel="noopener noreferrer">
+            Sign Language Translation project by Sign
+          </a> by the open-source community.
+        </p>
+        <p>
+          Special thanks to all contributors who made real-time sign language translation accessible to everyone.
+          This project continues their mission of breaking down communication barriers.
+        </p>
+        <div class="github-link">
+          <a href="https://github.com/sign/translate" target="_blank" rel="noopener noreferrer">
+            <ion-button fill="outline" color="dark">
+              <ion-icon name="logo-github" slot="start"></ion-icon>
+              View Original Repository
+            </ion-button>
+          </a>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- CTA Button -->
+    <div class="cta-section">
+      <ion-button 
+        (click)="continueToApp()" 
+        size="large" 
+        color="primary" 
+        class="continue-button">
+        Continue to App
+        <ion-icon name="arrow-forward" slot="end"></ion-icon>
+      </ion-button>
+      <p class="cta-subtitle">Start translating sign language in real-time</p>
+    </div>
+  </div>
+</ion-content>

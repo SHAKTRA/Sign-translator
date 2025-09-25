@@ -8,6 +8,10 @@ import {MainComponent} from './pages/main.component';
 
 export const routes: Routes = [
   {
+    path: '',
+    loadComponent: () => import('./pages/welcome/welcome.component').then(m => m.WelcomeComponent),
+  },
+  {
     path: 'playground',
     loadComponent: () => import('./pages/playground/playground.component').then(m => m.PlaygroundComponent),
   },
@@ -18,7 +22,7 @@ export const routes: Routes = [
   },
   {path: 'legal', loadChildren: () => import('./pages/landing/landing.routes').then(m => m.routes)},
   {
-    path: '',
+    path: 'app',
     component: MainComponent,
     children: [
       {

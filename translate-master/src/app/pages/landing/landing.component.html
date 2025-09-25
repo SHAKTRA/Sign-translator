@@ -20,7 +20,7 @@
       </ion-list>
     </ion-content>
     <ion-footer>
-      <ion-button routerLink="/" color="primary" queryParamsHandling="preserve" fill="clear">
+      <ion-button routerLink="/app" color="primary" queryParamsHandling="preserve" fill="clear">
         {{ 'landing.try' | transloco }}
       </ion-button>
     </ion-footer>
@@ -39,7 +39,7 @@
     </ion-title>
     @if (!isMobile.matches) {
       <ion-buttons slot="primary">
-        <ion-button routerLink="/" queryParamsHandling="preserve" color="primary" shape="round" fill="solid">
+        <ion-button routerLink="/app" queryParamsHandling="preserve" color="primary" shape="round" fill="solid">
           {{ 'landing.try' | transloco }}
           <ion-icon slot="end" name="arrow-forward" />
         </ion-button>
