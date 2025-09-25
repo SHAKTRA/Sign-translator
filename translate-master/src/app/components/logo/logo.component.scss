@@ -8,3 +8,30 @@ img {
   height: 1em;
   display: block;
 }
+
+.logo-text {
+  font-size: 2.5em;
+  font-weight: bold;
+  background: linear-gradient(45deg, #00ff88, #0088ff, #00ff88);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 136, 0.5),
+    0 0 20px rgba(0, 136, 255, 0.3),
+    0 0 30px rgba(0, 255, 136, 0.2);
+  animation: gradient-glow 3s ease-in-out infinite;
+  margin-left: 0.3em;
+}
+
+@keyframes gradient-glow {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: brightness(1) drop-shadow(0 0 15px rgba(0, 255, 136, 0.6));
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: brightness(1.2) drop-shadow(0 0 25px rgba(0, 136, 255, 0.8));
+  }
+}

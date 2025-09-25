@@ -7,14 +7,14 @@
     "shift": "Shift"
   },
   "translate": {
-    "logo": "Translate",
-    "title": "Sign Translate",
+    "logo": "Manos",
+    "title": "Manos",
     "language-selector": {
       "detected": "{{lang}} - Detected",
       "more": "More Languages",
       "detect": "Detect language"
     },
-    "description": "Effortless Real-Time Sign Language Translation. Translate Sign Language instantly on desktop and mobile.",
+    "description": "Effortless Real-Time Sign Language Translation with Manos. Translate Sign Language instantly on desktop and mobile.",
     "input": {
       "webcam": "Webcam",
       "upload": "Upload",
