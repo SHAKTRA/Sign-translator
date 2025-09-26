@@ -1,0 +1,281 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>🎓 Sign Language Courses</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- API Key Setup (if not configured) -->
+  @if (!hasApiKey) {
+    <div class="api-setup-container">
+      <ion-card class="api-key-card">
+        <ion-card-header>
+          <ion-card-title>🔑 Udemy API Setup Required</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>To access Udemy courses, you need API credentials from the Udemy Affiliate Program.</p>
+          
+          <div class="credentials-form">
+            <ion-item>
+              <ion-label position="stacked">Client ID</ion-label>
+              <ion-input 
+                [(ngModel)]="clientId" 
+                placeholder="Enter your Udemy Client ID"
+                type="text">
+              </ion-input>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label position="stacked">Client Secret</ion-label>
+              <ion-input 
+                [(ngModel)]="clientSecret" 
+                placeholder="Enter your Udemy Client Secret"
+                type="password">
+              </ion-input>
+            </ion-item>
+            
+            <ion-button 
+              (click)="setApiCredentials()" 
+              [disabled]="!clientId.trim() || !clientSecret.trim()"
+              expand="block"
+              color="primary"
+              class="setup-btn">
+              Connect to Udemy
+            </ion-button>
+          </div>
+          
+          <div class="setup-info">
+            <p><small>
+              <strong>How to get credentials:</strong><br>
+              1. Apply to <a href="https://www.udemy.com/affiliate/" target="_blank">Udemy Affiliate Program</a><br>
+              2. Get approved (3-4 business days)<br>
+              3. Access your API credentials in the affiliate dashboard
+            </small></p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  }
+
+  <!-- Main Content -->
+  @if (hasApiKey) {
+    <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <!-- Search and Filters -->
+    <div class="search-filters">
+      <ion-searchbar
+        [(ngModel)]="searchTerm"
+        (ionInput)="onSearch()"
+        placeholder="Search sign language courses..."
+        show-clear-button="focus">
+      </ion-searchbar>
+      
+      <div class="filter-chips">
+        <ion-item>
+          <ion-label>Level:</ion-label>
+          <ion-select 
+            [(ngModel)]="selectedLevel" 
+            (ionChange)="onFilterChange()"
+            interface="popover">
+            @for (level of levels; track level.value) {
+              <ion-select-option [value]="level.value">
+                {{ level.label }}
+              </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label>Price:</ion-label>
+          <ion-select 
+            [(ngModel)]="selectedPrice" 
+            (ionChange)="onFilterChange()"
+            interface="popover">
+            @for (price of priceFilters; track price.value) {
+              <ion-select-option [value]="price.value">
+                {{ price.label }}
+              </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label>Category:</ion-label>
+          <ion-select 
+            [(ngModel)]="selectedCategory" 
+            (ionChange)="onFilterChange()"
+            interface="popover">
+            @for (category of categories; track category.value) {
+              <ion-select-option [value]="category.value">
+                {{ category.label }}
+              </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    @if (isLoading && courses.length === 0) {
+      <div class="loading-container">
+        <ion-spinner name="crescent"></ion-spinner>
+        <p>Loading sign language courses...</p>
+      </div>
+    }
+
+    <!-- Courses Grid -->
+    @if (filteredCourses.length > 0) {
+      <ion-grid class="courses-grid">
+        <ion-row>
+          @for (course of filteredCourses; track course.id) {
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-card class="course-card" (click)="openCourse(course)">
+                <!-- Course Image -->
+                <div class="course-image-container">
+                  <img 
+                    [src]="course.image_480x270 || course.image_240x135" 
+                    [alt]="course.title"
+                    class="course-image">
+                  
+                  <!-- Price Badge -->
+                  <ion-badge 
+                    class="price-badge"
+                    [color]="course.price === 'Free' ? 'success' : 'primary'">
+                    {{ formatPrice(course) }}
+                  </ion-badge>
+                  
+                  <!-- Level Badge -->
+                  @if (course.instructional_level) {
+                    <ion-chip 
+                      class="level-chip"
+                      [color]="getLevelColor(course.instructional_level)">
+                      {{ course.instructional_level }}
+                    </ion-chip>
+                  }
+                </div>
+
+                <ion-card-header>
+                  <ion-card-title class="course-title">
+                    {{ course.title }}
+                  </ion-card-title>
+                  @if (course.headline) {
+                    <p class="course-headline">{{ course.headline }}</p>
+                  }
+                </ion-card-header>
+
+                <ion-card-content>
+                  <!-- Instructor Info -->
+                  @if (course.visible_instructors && course.visible_instructors.length > 0) {
+                    <div class="instructor-info">
+                      <img 
+                        [src]="course.visible_instructors[0].image_100x100" 
+                        [alt]="course.visible_instructors[0].display_name"
+                        class="instructor-avatar">
+                      <div class="instructor-details">
+                        <p class="instructor-name">{{ course.visible_instructors[0].display_name }}</p>
+                        @if (course.visible_instructors[0].job_title) {
+                          <p class="instructor-title">{{ course.visible_instructors[0].job_title }}</p>
+                        }
+                      </div>
+                    </div>
+                  }
+
+                  <!-- Course Stats -->
+                  <div class="course-stats">
+                    <!-- Rating -->
+                    @if (course.rating) {
+                      <div class="rating">
+                        <div class="stars">
+                          @for (filled of getStarArray(course.rating); track $index) {
+                            <ion-icon 
+                              name="star" 
+                              [class.filled]="filled">
+                            </ion-icon>
+                          }
+                        </div>
+                        <span class="rating-text">{{ course.rating.toFixed(1) }}</span>
+                        @if (course.num_reviews) {
+                          <span class="reviews">({{ formatStudentCount(course.num_reviews) }} reviews)</span>
+                        }
+                      </div>
+                    }
+
+                    <!-- Students -->
+                    @if (course.num_subscribers) {
+                      <div class="students">
+                        <ion-icon name="people"></ion-icon>
+                        <span>{{ formatStudentCount(course.num_subscribers) }} students</span>
+                      </div>
+                    }
+
+                    <!-- Content Info -->
+                    @if (course.content_info) {
+                      <div class="content-info">
+                        <ion-icon name="time"></ion-icon>
+                        <span>{{ course.content_info }}</span>
+                      </div>
+                    }
+                  </div>
+
+                  <!-- Action Buttons -->
+                  <div class="course-actions">
+                    <ion-button 
+                      fill="clear" 
+                      size="small"
+                      (click)="bookmarkCourse(course, $event)"
+                      [color]="isBookmarked(course) ? 'primary' : 'medium'">
+                      <ion-icon name="bookmark" slot="icon-only"></ion-icon>
+                    </ion-button>
+                    
+                    <ion-button 
+                      fill="clear" 
+                      size="small"
+                      (click)="shareCourse(course, $event)">
+                      <ion-icon name="share" slot="icon-only"></ion-icon>
+                    </ion-button>
+                    
+                    <ion-button 
+                      fill="solid" 
+                      size="small"
+                      color="primary"
+                      class="view-course-btn">
+                      <ion-icon name="play" slot="start"></ion-icon>
+                      View Course
+                    </ion-button>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+
+      <!-- Infinite Scroll -->
+      <ion-infinite-scroll 
+        (ionInfinite)="loadMore($event)"
+        [disabled]="!hasMorePages">
+        <ion-infinite-scroll-content
+          loading-spinner="bubbles"
+          loading-text="Loading more courses...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    }
+
+    <!-- No Results -->
+    @if (!isLoading && filteredCourses.length === 0) {
+      <div class="no-results">
+        <ion-icon name="school" class="no-results-icon"></ion-icon>
+        <h3>No courses found</h3>
+        <p>Try adjusting your search terms or filters</p>
+        <ion-button 
+          (click)="loadCourses(true)" 
+          fill="outline" 
+          color="primary">
+          Reset Filters
+        </ion-button>
+      </div>
+    }
+  }
+</ion-content>

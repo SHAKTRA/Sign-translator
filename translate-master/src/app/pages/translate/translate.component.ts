@@ -11,7 +11,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 import {ActivatedRoute} from '@angular/router';
 import {TranslateMobileComponent} from './translate-mobile/translate-mobile.component';
 import {TranslateDesktopComponent} from './translate-desktop/translate-desktop.component';
-import {SetText} from '../../modules/translate/translate.actions';
+import {SetSpokenLanguageText} from '../../modules/translate/translate.actions';
 
 @Component({
   selector: 'app-translate',
@@ -54,7 +54,7 @@ export class TranslateComponent extends BaseComponent implements OnInit {
       tap(params => {
         if (params['text']) {
           // Set the text in the store for the input component to use
-          this.store.dispatch(new SetText(decodeURIComponent(params['text'])));
+          this.store.dispatch(new SetSpokenLanguageText(decodeURIComponent(params['text'])));
           
           // If autoTranslate is true, trigger translation
           if (params['autoTranslate'] === 'true') {

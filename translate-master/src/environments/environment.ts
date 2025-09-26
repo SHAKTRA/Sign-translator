@@ -14,6 +14,9 @@ export const environment = {
     measurementId: null,
   },
   reCAPTCHAKey: '6Ldsxb8oAAAAAGyUZbyd0QruivPSudqAWFygR-4t',
+  // Udemy API configuration
+  udemyClientId: '', // Add your Udemy Client ID here
+  udemyClientSecret: '', // Add your Udemy Client Secret here
 };
 
 /*
